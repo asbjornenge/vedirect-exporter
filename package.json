@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@serialport/parser-readline": "^9.0.7",
     "serialport": "^9.1.0"
   }
 }
-

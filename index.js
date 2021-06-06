@@ -1,8 +1,10 @@
-var vedirect = require( 'vedirect' );
-var bmvdata = {};
-vedirect.open('/dev/ttyBMV0');
-forever {
-  bmvdata = vedirect.update();
-  console.log(bmvdata.V);
+import { connect, read } from './vedirect.js'
+
+connect('/dev/ttyUSB0')
+
+function updateMetrics() {
+  console.log(read())
+  setTimeout(updateMetrics, 5000)
 }
-vedirect.close('/dev/ttyBMV0');
+
+updateMetrics()

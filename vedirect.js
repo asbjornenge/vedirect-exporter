@@ -1,9 +1,5 @@
-var serialport = require('serialport');
-
-//
-// BMV
-//
-var serialport = require('serialport');
+import serialport from 'serialport'
+import Readline from '@serialport/parser-readline'
 
 var bmvdata = {};
 
@@ -19,7 +15,7 @@ function get_product_longname(pid) {
     if (pid == "0xA040") return("MPPT 75/50");
     if (pid == "0xA045") return("MPPT 100/50");
     return ("Unknown");
-};
+}
 
 function parse_serial(line) {
   var res = line.split("\t");
@@ -63,21 +59,19 @@ function parse_serial(line) {
   }
 }
 
-exports.open = function(ve_port) {
-  port =  new serialport(ve_port, {
-                        baudrate: 19200,
-                        parser: serialport.parsers.readline('\r\n')});
-                 port.on('data', function(line) {
-//                   parse_serial(ve_port, line);
-                   parse_serial(line);
-                 });
-
+export function connect(ve_port) {
+  const port =  new serialport(ve_port, {
+    baudRate: 19200,
+  })
+  const parser = port.pipe(new Readline({ delimiter: '\r\n' }))
+  parser.on('data', parse_serial)
 }
 
-exports.update = function() {
-  return bmvdata;
+export function read() {
+  return bmvdata
 }
 
-exports.close = function() {
+export function close() {
+
 }
 
