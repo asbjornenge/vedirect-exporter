@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@serialport/parser-readline": "^9.0.7",
+    "prometheus-client": "^0.1.1",
     "serialport": "^9.1.0"
   }
 }

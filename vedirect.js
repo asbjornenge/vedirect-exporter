@@ -14,11 +14,13 @@ function get_product_longname(pid) {
     if (pid == "0xA041") return("MPPT 150/35");
     if (pid == "0xA040") return("MPPT 75/50");
     if (pid == "0xA045") return("MPPT 100/50");
+    if (pid == "0xA065") return("MPPT 250/100");
     return ("Unknown");
 }
 
 function parse_serial(line) {
   var res = line.split("\t");
+  //console.log(res)
 
   switch(res[0]) {
       case    'V':
